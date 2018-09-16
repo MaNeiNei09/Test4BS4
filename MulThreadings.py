@@ -30,17 +30,19 @@ def multithreading():
     for i in range(3):
         t = threading.Thread(target=job, args=(data[i], q))
         print('Thread T%s starts,for list data%s=%s,the results is:' %(i,i,data[i]))
-        t.start()
         start = time.time()
+        t.start()
         threads.append(t)
         print(q.get())
         stop = time.time()
         cost = stop - start
-        print('Thread T%s finish,it cost %d seconds'%(i,cost))
+        print('Thread T%s finish,it cost %1.20f seconds'%(i,cost))
         print('-----------------------------')
 
     for thread in threads:
         thread.join()
 
 if __name__ == '__main__':
+    s_t = time.time()
     multithreading()
+    print('cost:%1.8f s'%(time.time()-s_t))
